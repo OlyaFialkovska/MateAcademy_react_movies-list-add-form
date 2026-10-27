@@ -17,7 +17,7 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
   const [changedImdbUrl, setChangedImdbUrl] = useState('');
   const [changedImdbId, setChangedImdbId] = useState('');
 
-  const submitCheck = (event: React.FormEvent) => {
+  const submitCheck = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onAdd({
       title: changedTitle,
@@ -36,70 +36,65 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
   };
 
   return (
-    <>
-      <form className="NewMovie" key={count}>
-        <h2 className="title">Add a movie</h2>
+    <form className="NewMovie" key={count} onSubmit={submitCheck}>
+      <h2 className="title">Add a movie</h2>
 
-        <TextField
-          name="title"
-          label="Title"
-          value={changedTitle}
-          onChange={setChangedTitle}
-          required
-        />
+      <TextField
+        name="title"
+        label="Title"
+        value={changedTitle}
+        onChange={setChangedTitle}
+        required
+      />
 
-        <TextField
-          name="description"
-          label="Description"
-          value={changedDescription}
-          onChange={setChangedDescription}
-        />
+      <TextField
+        name="description"
+        label="Description"
+        value={changedDescription}
+        onChange={setChangedDescription}
+      />
 
-        <TextField
-          name="imgUrl"
-          label="Image URL"
-          value={changedImgUrl}
-          onChange={setChangedImgUrl}
-          required
-        />
+      <TextField
+        name="imgUrl"
+        label="Image URL"
+        value={changedImgUrl}
+        onChange={setChangedImgUrl}
+        required
+      />
 
-        <TextField
-          name="imdbUrl"
-          label="Imdb URL"
-          value={changedImdbUrl}
-          onChange={setChangedImdbUrl}
-          required
-        />
+      <TextField
+        name="imdbUrl"
+        label="Imdb URL"
+        value={changedImdbUrl}
+        onChange={setChangedImdbUrl}
+        required
+      />
 
-        <TextField
-          name="imdbId"
-          label="Imdb ID"
-          value={changedImdbId}
-          onChange={setChangedImdbId}
-          required
-        />
+      <TextField
+        name="imdbId"
+        label="Imdb ID"
+        value={changedImdbId}
+        onChange={setChangedImdbId}
+        required
+      />
 
-        <div className="field is-grouped">
-          <div className="control">
-            <button
-              disabled={
-                changedTitle === '' ||
-                changedImdbId === '' ||
-                changedImdbUrl === '' ||
-                changedImgUrl === ''
-              }
-              type="submit"
-              data-cy="submit-button"
-              className="button is-link"
-              onClick={event => {
-                submitCheck(event);
-              }}
-            >
-              Add
-            </button>
-          </div>
+      <div className="field is-grouped">
+        <div className="control">
+          <button
+            disabled={
+              changedTitle.trim() === '' ||
+              changedImdbId.trim() === '' ||
+              changedImdbUrl.trim() === '' ||
+              changedImgUrl.trim() === ''
+            }
+            type="submit"
+            data-cy="submit-button"
+            className="button is-link"
+          >
+            Add
+          </button>
         </div>
-      </form>
-    </>
+      </div>
+    </form>
   );
 };
